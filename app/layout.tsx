@@ -1,7 +1,11 @@
 import type { Metadata } from "next";
 import { AuthProvider } from "@/context/AuthContext";
 import { Geist, Geist_Mono } from "next/font/google";
+import { Header } from "@/components/Header/Header";
 import "./globals.css";
+import { QueryProvider } from "@/components/providers/QueryProvider";
+import { Slide, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -26,9 +30,25 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${geistSans.variable} ${geistMono.variable}`}>
       <body>
-        <AuthProvider>
+        <QueryProvider>
+          <ToastContainer
+              position="top-center"
+              autoClose={1500}
+              hideProgressBar={false}
+              newestOnTop={false}
+              closeOnClick={false}
+              rtl={false}
+              pauseOnFocusLoss
+              draggable
+              pauseOnHover
+              theme="light"
+              transition={Slide}
+            />
+            <AuthProvider>
+          <Header/>
             {children}
         </AuthProvider>
+        </QueryProvider>
       </body>
     </html>
   );

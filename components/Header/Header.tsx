@@ -1,10 +1,13 @@
+'use client'
 import { useAuth } from '@/hooks/useAuth'
 import { useState } from 'react';
 import { signOut } from 'firebase/auth';
 import { auth } from '@/lib/firebase';
-import css from 'Header.module.css'
+import css from './Header.module.css'
 import Link from 'next/link'
 import Modal from '../Modal/Modal';
+import { LoginForm } from '../forms/LoginForm/LoginForm';
+import { RegisterForm } from '../forms/RegisterForm/RegisterForm';
 
 type ModalType = "login" | "register" | null;
 
