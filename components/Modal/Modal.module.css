@@ -13,10 +13,19 @@
 
 .modal {
   background-color: #ffffff;
-  padding: 24px;
+  padding: 64px;
   border-radius: 8px;
-  max-width: 500px;
+  max-width: 565px;
   width: 100%;
   position: relative;
+  
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+.closeBtn {
+  position: absolute;
+  top: 8px;
+  right: 12px;
+  font-size: 24px;
+  color: #333;
+  cursor: pointer;
 }

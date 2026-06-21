@@ -37,6 +37,9 @@ export default function Modal({children, onClose}:ModalProps){
   onClick={handleBackdropClick}
 >
   <div className={css.modal}>
+    <div className={css.closeBtn} onClick={onClose} aria-label="Close modal">
+    &times;
+  </div>
     {children}
   </div>
 </div>,

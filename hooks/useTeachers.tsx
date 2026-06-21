@@ -1,24 +1,14 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useMemo } from "react";
 import { useQuery } from "@tanstack/react-query";
-import { ref, query, limitToFirst, startAt, orderByKey, get } from "firebase/database";
+import { ref, get } from "firebase/database";
 import { db } from "@/lib/firebase";
 import { Teacher } from "@/types/teacher";
+import { Filters } from "@/types/filters";
 
-const PAGE_SIZE = 4;
-
-const fetchTeachers = async (startIndex: number): Promise<Teacher[]> => {
-  const teachersRef = ref(db, "teachers");
-
-  const q = query(
-    teachersRef,
-    orderByKey(),
-    startAt(String(startIndex)),
-    limitToFirst(PAGE_SIZE + 1)
-  );
-
-  const snapshot = await get(q);
+const fetchAllTeachers = async (): Promise<Teacher[]> => {
+  const snapshot = await get(ref(db, "teachers"));
   if (!snapshot.exists()) return [];
 
   const data = snapshot.val();
@@ -28,35 +18,50 @@ const fetchTeachers = async (startIndex: number): Promise<Teacher[]> => {
   }));
 };
 
-export function useTeachers() {
-  const [startIndex, setStartIndex] = useState(0);
-  const [allTeachers, setAllTeachers] = useState<Teacher[]>([]);
-  const [hasMore, setHasMore] = useState(true);
+const PAGE_SIZE = 4;
 
-  const { isLoading, isFetching } = useQuery({
-    queryKey: ["teachers", startIndex],
-    queryFn: async () => {
-      const list = await fetchTeachers(startIndex);
+export function useTeachers(filters: Filters) {
+  const [page, setPage] = useState(1);
 
-      const isMore = list.length > PAGE_SIZE;
-      const newTeachers = isMore ? list.slice(0, PAGE_SIZE) : list;
-
-      setAllTeachers((prev) => [...prev, ...newTeachers]);
-      setHasMore(isMore);
-
-      return newTeachers;
-    },
-    staleTime: Infinity, 
+  const { data: allTeachers = [], isLoading } = useQuery({
+    queryKey: ["teachers"],
+    queryFn: fetchAllTeachers,
+    staleTime: Infinity,
   });
 
-  const loadMore = () => {
-    if (hasMore) setStartIndex((prev) => prev + PAGE_SIZE);
-  };
+  
+  const filtered = useMemo(() => {
+    return allTeachers.filter((teacher) => {
+      const matchLanguage = filters.language
+        ? teacher.languages.includes(filters.language)
+        : true;
+
+      const matchLevel = filters.level
+        ? teacher.levels.includes(filters.level)
+        : true;
+
+      const matchPrice = filters.price
+        ? teacher.price_per_hour <= filters.price
+        : true;
+
+      return matchLanguage && matchLevel && matchPrice;
+    });
+  }, [allTeachers, filters]);
+
+  
+  const paginated = filtered.slice(0, page * PAGE_SIZE);
+  const hasMore = paginated.length < filtered.length;
+
+  const loadMore = () => setPage((prev) => prev + 1);
+
+  
+  const resetPage = () => setPage(1);
 
   return {
-    teachers: allTeachers,
-    loading: isLoading || isFetching,
+    teachers: paginated,
+    loading: isLoading,
     hasMore,
     loadMore,
+    resetPage,
   };
 }

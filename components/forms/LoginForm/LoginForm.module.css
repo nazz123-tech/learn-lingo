@@ -1,0 +1,81 @@
+.container {
+    width: 438px;
+    display: flex;
+    flex-direction: column;
+    gap:40px;
+}
+.header{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+.description{
+font-weight: 400;
+font-size: 16px;
+line-height: 138%;
+color: rgba(18, 20, 23, 0.8);
+}
+.title{
+font-weight: 500;
+font-size: 40px;
+line-height: 120%;
+letter-spacing: -0.02em;
+color: #121417;
+}
+.form{
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+}
+.field{
+    border: 1px solid rgba(18, 20, 23, 0.1);
+border-radius: 12px;
+
+background-color: transparent;
+font-weight: 400;
+font-size: 16px;
+line-height: 138%;
+color: #121417;
+padding: 16px 18px;
+}
+.submitBtn{
+    margin-top: 22px;
+    border-radius: 12px;
+width: 438px;
+height: 60px;
+background: #f4c550;
+font-family: var(--font-family);
+font-weight: 700;
+font-size: 18px;
+line-height: 156%;
+color: #121417;
+}
+.submitBtn:hover{
+    background: #ffdc86;
+}
+.fieldWrapper {
+  position: relative;
+}
+
+.fieldWrapper input {
+  width: 100%;
+}
+
+.fieldWrapper button {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.eyeIcon {
+  font-size: 20px;
+  color: #121417;
+}
+.error{
+    color: red;
+    padding-left: 8px;
+}

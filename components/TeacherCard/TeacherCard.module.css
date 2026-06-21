@@ -1,0 +1,12 @@
+.readMoreBtn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+.expanded {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}

@@ -27,7 +27,7 @@ export const Header =() => {
       <nav>
         <Link href="/">Home</Link>
         <Link href="/teachers">Teachers</Link>
-        {user && <Link href="/favorites">Favorites</Link>}
+        {user && <Link href="/favourites">Favorites</Link>}
       </nav>
 
       {user ? (
