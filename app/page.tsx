@@ -1,6 +1,13 @@
 "use client";
 import css from "./page.module.css"
 import {useRouter} from "next/navigation"
+import { Metadata } from "next";
+
+const metadata: Metadata = {
+  title: 'Home',
+  description: 'Get started with LearnLingo',
+};
+
 export default function Home() {
     const router=useRouter();
  return <main>

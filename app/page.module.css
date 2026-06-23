@@ -62,6 +62,8 @@ font-weight: 700;
 font-size: 18px;
 line-height: 156%;
 color: #121417;
+cursor: pointer;
+transition: background 0.3s ease;
 }
 .button:hover{
     background: #ffdc86;

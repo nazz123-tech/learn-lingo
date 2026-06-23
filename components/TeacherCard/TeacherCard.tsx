@@ -14,6 +14,7 @@ import { FaStar } from "react-icons/fa";
 import { IoBookOutline } from "react-icons/io5";
 import { Filters } from "@/types/filters";
 
+
 export default function TeacherCard({ teacher, filters }: { teacher: Teacher; filters?: Filters }) {
   const { user } = useAuth();
   const { isFavorite, toggleFavorite } = useFavorites();
@@ -31,7 +32,7 @@ export default function TeacherCard({ teacher, filters }: { teacher: Teacher; fi
 
   return (
     <div className={css.contentWrapper}>
-      <div>
+      <div className={css.around}>
         <Image
           className={css.avatar}
           src={teacher.avatar_url}
@@ -39,7 +40,7 @@ export default function TeacherCard({ teacher, filters }: { teacher: Teacher; fi
           width={96}
           height={96}
         />
-        <span />
+        <img width={12} height={12} src={'/online.svg'} alt='online' className={css.online}></img>
       </div>
 
       <div className={css.infoWrapper}>
@@ -101,8 +102,7 @@ export default function TeacherCard({ teacher, filters }: { teacher: Teacher; fi
           </button>
         )}
 
-        {isExpanded && (
-          <div className={css.expanded}>
+          <div className={`${css.expanded} ${isExpanded ? css.expandedVisible : ""}`}>
             <p className={css.experience}>{teacher.experience}</p>
 
             <ul className={css.reviewList}>
@@ -132,7 +132,7 @@ export default function TeacherCard({ teacher, filters }: { teacher: Teacher; fi
 
            
           </div>
-        )}
+
 
         <ul className={css.languageList}>
           {teacher.levels.map((level) => (

@@ -20,6 +20,15 @@ margin-bottom: 32px;
   display: flex;
   flex-direction: column;
   gap: 16px;
+  max-height: 0;
+  opacity: 0;
+  overflow: hidden;
+  transition: max-height 0.6s ease-in-out, opacity 0.5s ease-in-out;
+}
+
+.expandedVisible {
+  max-height: 2000px; 
+  opacity: 1;
 }
 .contentWrapper{
   display: flex;
@@ -198,8 +207,28 @@ font-size: 18px;
 line-height: 156%;
 color: #121417;
 margin-top: 32px;
+transition: background 0.3s ease;
 cursor: pointer;
 }
 .bookingBtn:hover{
   background: #ffdc86;
+}
+.around{
+  border: 3px solid #fbe9ba;
+border-radius: 100px;
+width: 120px;
+height: 120px;
+position: relative;
+display: flex;
+justify-content: center;
+align-items: center;
+}
+.online{
+  position: absolute;
+  z-index: 999;
+  top: 15px;
+  right: 15px;
+  fill:#38CD3E;
+  stroke:white;
+  stroke-width: 2px;
 }
