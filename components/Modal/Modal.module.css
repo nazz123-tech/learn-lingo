@@ -23,9 +23,8 @@
 }
 .closeBtn {
   position: absolute;
-  top: 8px;
-  right: 12px;
-  font-size: 24px;
+  top: 28px;
+  right: 28px;
   color: #333;
   cursor: pointer;
 }

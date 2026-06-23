@@ -1,5 +1,5 @@
 export interface Filters {
-  language: string;
-  level: string;
+  language: string | null;
+  level: string | null;
   price: number | null;
 }

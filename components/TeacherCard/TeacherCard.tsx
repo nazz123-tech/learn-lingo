@@ -9,8 +9,12 @@ import Modal from "@/components/Modal/Modal";
 import {BookingForm }from "@/components/forms/BookingForm/BookingForm";
 import { toast } from "react-toastify";
 import css from "./TeacherCard.module.css";
+import { IoMdHeart, IoMdHeartEmpty} from "react-icons/io";
+import { FaStar } from "react-icons/fa";
+import { IoBookOutline } from "react-icons/io5";
+import { Filters } from "@/types/filters";
 
-export default function TeacherCard({ teacher }: { teacher: Teacher }) {
+export default function TeacherCard({ teacher, filters }: { teacher: Teacher; filters?: Filters }) {
   const { user } = useAuth();
   const { isFavorite, toggleFavorite } = useFavorites();
   const [isExpanded, setIsExpanded] = useState(false);
@@ -26,9 +30,10 @@ export default function TeacherCard({ teacher }: { teacher: Teacher }) {
   };
 
   return (
-    <div>
+    <div className={css.contentWrapper}>
       <div>
         <Image
+          className={css.avatar}
           src={teacher.avatar_url}
           alt={`${teacher.name} ${teacher.surname}`}
           width={96}
@@ -37,59 +42,114 @@ export default function TeacherCard({ teacher }: { teacher: Teacher }) {
         <span />
       </div>
 
-      <div>
-        <div>
-          <div>
-            <p>Languages</p>
-            <h2>{teacher.name} {teacher.surname}</h2>
+      <div className={css.infoWrapper}>
+        <div className={css.header}>
+          <div className={css.person}>
+            <p className={css.title}>Languages</p>
+            <h2 className={css.name}>
+              {teacher.name} {teacher.surname}
+            </h2>
           </div>
 
-          <div>
-            <span>Lessons online</span>
-            <span>Lessons done: <b>{teacher.lessons_done}</b></span>
-            <span>Rating: <b>{teacher.rating}</b></span>
-            <span>Price / 1 hour: <b>{teacher.price_per_hour}$</b></span>
-            <button onClick={handleFavorite}>
-              {isFavorite(teacher.id) ? "❤️" : "🤍"}
-            </button>
+          <div className={css.additional}>
+            <span>
+              <IoBookOutline size={16} />
+              Lessons online
+            </span>
+            <span className={css.separator}>|</span>
+            <span>Lessons done: {teacher.lessons_done}</span>
+            <span className={css.separator}>|</span>
+            <span>
+              <FaStar size={16} className={css.star} />
+              Rating: {teacher.rating}
+            </span>
+            <span className={css.separator}>|</span>
+            <span>
+              Price / 1 hour:{" "}
+              <span className={css.price}>{teacher.price_per_hour}$</span>
+            </span>
           </div>
+          <button className={css.button} onClick={handleFavorite}>
+            {isFavorite(teacher.id) ? (
+              <IoMdHeart size={26} className={css.favourite} />
+            ) : (
+              <IoMdHeartEmpty className={css.emptyIcon} size={26} />
+            )}
+          </button>
+        </div>
+        <div className={css.conditions}>
+          <p>
+            <span>Speaks: </span>
+            {teacher.languages.join(", ")}
+          </p>
+          <p>
+            <span>Lesson Info: </span>
+            {teacher.lesson_info}
+          </p>
+          <p>
+            <span>Conditions: </span>
+            {teacher.conditions.join(", ")}
+          </p>
         </div>
 
-        <p><span>Speaks: </span>{teacher.languages.join(", ")}</p>
-        <p><span>Lesson Info: </span>{teacher.lesson_info}</p>
-        <p><span>Conditions: </span>{teacher.conditions.join(", ")}</p>
-
         {!isExpanded && (
-          <button className={css.readMoreBtn} onClick={() => setIsExpanded(true)}>
+          <button
+            className={css.readMoreBtn}
+            onClick={() => setIsExpanded(true)}
+          >
             Read more
           </button>
         )}
 
         {isExpanded && (
           <div className={css.expanded}>
-            <p>{teacher.experience}</p>
+            <p className={css.experience}>{teacher.experience}</p>
 
-            <ul>
+            <ul className={css.reviewList}>
               {teacher.reviews.map((review, index) => (
-                <li key={index}>
-                  <p>{review.reviewer_name}</p>
-                  <p>⭐ {review.reviewer_rating}</p>
-                  <p>{review.comment}</p>
+                <li className={css.review} key={index}>
+                  <div className={css.reviewer}>
+                    <img
+                      src={`https://ui-avatars.com/api/?name=${encodeURIComponent(
+                        review.reviewer_name,
+                      )}&background=random&rounded=true`}
+                      width={44}
+                      height={44}
+                      alt={review.reviewer_name}
+                    />
+                    <div className={css.reviewInfo}>
+                      <p className={css.reviewName}>{review.reviewer_name}</p>
+                      <p className={css.reviewRating}>
+                        <FaStar size={16} className={css.star} /> {review.reviewer_rating}.0
+                      </p>
+                    </div>
+                  </div>
+
+                  <p className={css.reviewComment}>{review.comment}</p>
                 </li>
               ))}
             </ul>
 
-            <button onClick={() => setIsBookingOpen(true)}>
-              Book trial lesson
-            </button>
+           
           </div>
         )}
 
-        <ul>
+        <ul className={css.languageList}>
           {teacher.levels.map((level) => (
-            <li key={level}>#{level}</li>
+            <li
+      className={`${css.language} ${filters?.level === level ? css.languageActive : ''}`}
+      key={level}
+    >
+              #{level}
+            </li>
           ))}
         </ul>
+        {isExpanded &&  <button
+              className={css.bookingBtn}
+              onClick={() => setIsBookingOpen(true)}
+            >
+              Book trial lesson
+            </button>}
       </div>
 
       {isBookingOpen && (

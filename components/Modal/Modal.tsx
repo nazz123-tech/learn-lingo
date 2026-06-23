@@ -1,6 +1,7 @@
 'use client'
 import { createPortal } from "react-dom"
 import { useEffect } from "react"
+import { RxCross1 } from "react-icons/rx";
 import css from './Modal.module.css'
 
 interface ModalProps{
@@ -38,7 +39,7 @@ export default function Modal({children, onClose}:ModalProps){
 >
   <div className={css.modal}>
     <div className={css.closeBtn} onClick={onClose} aria-label="Close modal">
-    &times;
+      <RxCross1 size={20} />
   </div>
     {children}
   </div>

@@ -5,6 +5,8 @@ import { useTeachers } from "@/hooks/useTeachers";
 import { FiltersBar } from "@/components/FiltersBar/FiltersBar";
 import TeacherCard from "@/components/TeacherCard/TeacherCard";
 import { Filters } from "@/types/filters";
+import css from './page.module.css'
+import { Loader } from "@/components/Loader/Loader";
 
 const defaultFilters: Filters = {
   language: "",
@@ -22,22 +24,25 @@ export default function TeachersPage() {
   };
 
   return (
-    <main>
+    <main className={css.main}>
       <FiltersBar filters={filters} onChange={handleFilterChange} />
-
-      <ul>
+      <div className={css.container}>
+           <ul className={css.list}>
         {teachers.map((teacher) => (
-          <li key={teacher.id}>
-            <TeacherCard teacher={teacher} />
+          <li className={css.item} key={teacher.id}>
+            <TeacherCard filters={filters} teacher={teacher} />
           </li>
         ))}
       </ul>
-
-      {loading && <p>Завантаження...</p>}
+      {loading && <Loader/>}
 
       {hasMore && !loading && (
-        <button onClick={loadMore}>Load more</button>
+        <button className={css.loadMoreBtn} onClick={loadMore}>Load more</button>
       )}
+      </div>
+     
+
+      
     </main>
   );
 }

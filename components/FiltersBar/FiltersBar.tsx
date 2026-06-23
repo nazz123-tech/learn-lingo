@@ -1,10 +1,36 @@
+
 "use client";
 
 import { Filters } from "@/types/filters";
+import { CustomSelect } from "../CustomSelect/CustomSelect";
+import css from './FiltersBar.module.css'
 
-const LANGUAGES = ["English", "French", "German", "Spanish", "Italian"];
-const LEVELS = ["A1 Beginner", "A2 Elementary", "B1 Intermediate", "B2 Upper-Intermediate", "C1 Advanced", "C2 Proficient"];
-const PRICES = [10, 20, 30, 40];
+const LANGUAGES = [
+  { label: "All languages", value: null },
+  { label: "English", value: "English" },
+  { label: "French", value: "French" },
+  { label: "German", value: "German" },
+  { label: "Spanish", value: "Spanish" },
+  { label: "Italian", value: "Italian" },
+];
+
+const LEVELS = [
+  { label: "All levels", value: null },
+  { label: "A1 Beginner", value: "A1 Beginner" },
+  { label: "A2 Elementary", value: "A2 Elementary" },
+  { label: "B1 Intermediate", value: "B1 Intermediate" },
+  { label: "B2 Upper-Intermediate", value: "B2 Upper-Intermediate" },
+  { label: "C1 Advanced", value: "C1 Advanced" },
+  { label: "C2 Proficient", value: "C2 Proficient" },
+];
+
+const PRICES = [
+  { label: "All prices", value: null },
+  { label: "10 $", value: 10 },
+  { label: "20 $", value: 20 },
+  { label: "30 $", value: 30 },
+  { label: "40 $", value: 40 },
+];
 
 interface FiltersBarProps {
   filters: Filters;
@@ -12,41 +38,29 @@ interface FiltersBarProps {
 }
 
 export function FiltersBar({ filters, onChange }: FiltersBarProps) {
-  const handleChange = (key: keyof Filters, value: string | number | null) => {
-    onChange({ ...filters, [key]: value });
-  };
-
   return (
-    <div>
-      <select
-        value={filters.language}
-        onChange={(e) => handleChange("language", e.target.value)}
-      >
-        <option value="">All languages</option>
-        {LANGUAGES.map((lang) => (
-          <option key={lang} value={lang}>{lang}</option>
-        ))}
-      </select>
-
-      <select
-        value={filters.level}
-        onChange={(e) => handleChange("level", e.target.value)}
-      >
-        <option value="">All levels</option>
-        {LEVELS.map((level) => (
-          <option key={level} value={level}>{level}</option>
-        ))}
-      </select>
-
-      <select
-        value={filters.price ?? ""}
-        onChange={(e) => handleChange("price", e.target.value ? Number(e.target.value) : null)}
-      >
-        <option value="">All prices</option>
-        {PRICES.map((price) => (
-          <option key={price} value={price}>{price}$</option>
-        ))}
-      </select>
+    <div className={css.container}>
+      <CustomSelect
+      wide={'221px'}
+        label="Languages"
+        options={LANGUAGES}
+        value={filters.language ?? null}
+        onChange={(val) => onChange({ ...filters, language: val as string | null })}
+      />
+      <CustomSelect
+      wide={'198px'}
+        label="Level of knowledge"
+        options={LEVELS}
+        value={filters.level ?? null}
+        onChange={(val) => onChange({ ...filters, level: val as string | null })}
+      />
+      <CustomSelect
+      wide={'124px'}
+        label="Price"
+        options={PRICES}
+        value={filters.price ?? null}
+        onChange={(val) => onChange({ ...filters, price: val as number | null })}
+      />
     </div>
   );
 }

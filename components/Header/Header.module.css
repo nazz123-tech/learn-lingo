@@ -1,8 +1,94 @@
 .header {
   display: flex;
+  padding: 1rem 2rem;
+  background-color: White;
+  
+}
+.container{
+  display: flex;
+  flex-direction: row;
+  width: 1184px;
+  margin: 0 auto;
   justify-content: space-between;
   align-items: center;
-  padding: 1rem 2rem;
-  background-color: #333;
-  color: white;
+}
+.logo{
+  display: flex;
+  align-items: center;
+  gap: 8px;
+font-weight: 500;
+font-size: 20px;
+line-height: 120%;
+letter-spacing: -0.02em;
+color: #121417;
+}
+.nav{
+  display: flex;
+  flex-direction: row;
+
+font-weight: 400;
+font-size: 16px;
+line-height: 125%;
+color: #121417;
+gap:28px;
+}
+.userSection{
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  gap: 16px;
+}
+.userName{
+font-weight: 700;
+font-size: 16px;
+line-height: 125%;
+color: #121417;
+cursor: default;
+}
+.logoutButton, .registerButton{
+  border-radius: 12px;
+padding: 14px 39px;
+width: 166px;
+height: 48px;
+background: #121417;
+font-family: var(--font-family);
+font-weight: 700;
+font-size: 16px;
+line-height: 125%;
+color: #fff;
+cursor: pointer;
+}
+.logoutButton:hover, .registerButton:hover{
+  background: #ffdc86;
+  color:#121417
+}
+.authButtons{
+  display: flex;
+  gap: 16px;
+}
+.loginButton{
+  display: flex;
+  align-items: center;
+  border:none;
+  background: none;
+  font-family: var(--font-family);
+font-weight: 700;
+font-size: 16px;
+line-height: 125%;
+color: #121417;
+cursor: pointer;
+}
+.loginIcon{
+  margin-right: 8px;
+  color: #F4C550;
+}
+.loginButton:hover{
+  text-decoration: underline;
+}
+.navLink{
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+.navLink:hover{
+  transform: translateY(-2px);
 }

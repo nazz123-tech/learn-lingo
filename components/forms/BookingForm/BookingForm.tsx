@@ -6,7 +6,8 @@ import { toast } from "react-toastify";
 import { useAuth } from "@/hooks/useAuth";
 import { set} from "firebase/database";
 import { ref } from "firebase/database";
-import { db } from "@/lib/firebase";    
+import { db } from "@/lib/firebase";  
+import css from "./BookingForm.module.css";  
 
 interface BookingFormProps {
     onClose: () => void,
@@ -45,45 +46,54 @@ export function BookingForm({onClose, teacher}:BookingFormProps) {
         }
       };
       return (
-        <div>
-            <form onSubmit={handleSubmit(onSubmit)}>
-                <h2>Booking Trial Lesson</h2>
-                <div>
-                    <h3>Teacher: {teacher.name} {teacher.surname}</h3>
-                    <p>{teacher.lesson_info}</p>
+        <div className={css.container}>
+            <form className={css.form} onSubmit={handleSubmit(onSubmit)}>
+                <div className={css.header}>
+                    <h2 className={css.title}>Booking Trial Lesson</h2>
+                    <p className={css.description}>Our experienced tutor will assess your current language level, discuss your learning goals, and tailor the lesson to your specific needs.</p>  
                 </div>
-                <div>
+                <div className={css.teacherInfo}>
+                    <img className={css.avatar} src={teacher.avatar_url} alt={`${teacher.name} ${teacher.surname}`} />
+                    <div className={css.teacherDetails}>
+                        <h3 className={css.subtitle}>Your Teacher</h3>
+                    <span className={css.teacherName}>{teacher.name} {teacher.surname}</span>
+                    </div>
+                </div>
+                <div className={css.radioGroup}>
+                    <h3 className={css.radioTitle}></h3>
                      {REASONS.map(reason => (
-                    <div key={reason}>
-                        <input type="radio" value={reason} {...register("reason")} />
-                        <label>{reason}</label>
+                    <div className={css.radioWrapper} key={reason}>
+                        <input className={css.radio} id={reason} type="radio" value={reason} {...register("reason")} />
+                        <label className={css.radioLabel} htmlFor={reason}>
+                            {reason}
+                        </label>
                     </div>
                 ))}
-                {errors.reason && <p>{errors.reason.message}</p>}
+                {errors.reason && <p className={css.error}>{errors.reason.message}</p>}
                 </div>
-                <div>
-                    <input
+                <div className={css.fieldWrapper}>
+                    <input className={css.field}
                         {...register("fullname")}
                         placeholder="Full Name"
                     />
-                    {errors.fullname && <p>{errors.fullname.message}</p>}
+                    {errors.fullname && <p className={css.error}>{errors.fullname.message}</p>}
                 </div>
-                <div>
-                    <input
+                <div className={css.fieldWrapper}>
+                    <input className={css.field}
                         {...register("email")}
                         placeholder="Email"
                     />
-                    {errors.email && <p>{errors.email.message}</p>}
+                    {errors.email && <p className={css.error}>{errors.email.message}</p>}
                 </div>
-                <div>
-                    <input
+                <div className={css.fieldWrapper}>
+                    <input className={css.field}
                         {...register("number")}
                         placeholder="Phone Number"
                     />
-                    {errors.number && <p>{errors.number.message}</p>}
+                    {errors.number && <p className={css.error}>{errors.number.message}</p>}
                 </div>
-                {errors.root && <p>{errors.root.message}</p>}
-                <button type="submit" disabled={isSubmitting}>
+                {errors.root && <p className={css.error}>{errors.root.message}</p>}
+                <button className={css.submitBtn} type="submit" disabled={isSubmitting}>
                     {isSubmitting ? "Booking..." : "Book Now"}
                 </button>
             </form>

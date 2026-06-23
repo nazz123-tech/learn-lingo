@@ -8,7 +8,7 @@ import Link from 'next/link'
 import Modal from '../Modal/Modal';
 import { LoginForm } from '../forms/LoginForm/LoginForm';
 import { RegisterForm } from '../forms/RegisterForm/RegisterForm';
-
+import { LuLogIn } from "react-icons/lu";
 type ModalType = "login" | "register" | null;
 
 export const Header =() => {
@@ -22,23 +22,28 @@ export const Header =() => {
     }
     return (
         <header className={css.header}>
-      <Link href="/">LearnLingo</Link>
+          <div className={css.container}>
+            <Link className={css.logo} href="/">
+        <img className={css.logoImg} src="/ukraine.svg" alt="LearnLingo Logo" />
+        LearnLingo</Link>
 
-      <nav>
-        <Link href="/">Home</Link>
-        <Link href="/teachers">Teachers</Link>
-        {user && <Link href="/favourites">Favorites</Link>}
+      <nav className={css.nav}>
+        <Link className={css.navLink} href="/">Home</Link>
+        <Link  className={css.navLink} href="/teachers">Teachers</Link>
+        {user && <Link className={css.navLink} href="/favourites">Favourites</Link>}
       </nav>
 
       {user ? (
-        <div>
-          <p>{user.displayName}</p>
-          <button onClick={handleLogout}>Вийти</button>
+        <div className={css.userSection}>
+          <p className={css.userName}>{user.displayName}</p>
+          <button className={css.logoutButton} onClick={handleLogout}>
+            Logout
+          </button>
         </div>
       ) : (
-        <div>
-          <button onClick={() => setModalType("login")}>Увійти</button>
-          <button onClick={() => setModalType("register")}>Реєстрація</button>
+        <div className={css.authButtons}>
+          <button className={css.loginButton} onClick={() => setModalType("login")}><LuLogIn className={css.loginIcon} />Login</button>
+          <button className={css.registerButton} onClick={() => setModalType("register")}>Registration</button>
         </div>
       )}
 
@@ -48,6 +53,8 @@ export const Header =() => {
           {modalType === "register" && <RegisterForm onClose={handleClose} />}
         </Modal>
       )}
+          </div>
+      
     </header>
     )
 }

@@ -1,1 +1,106 @@
-
+.container {
+  width: 1312px;
+  margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap:24px;
+    
+}
+.content{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 24px;
+    
+}
+.title{
+    font-family: var(--font-family);
+font-weight: 500;
+font-size: 48px;
+line-height: 117%;
+letter-spacing: -0.02em;
+color: #121417;
+}
+.title span{
+    font-style: italic;
+font-weight: 400;
+background: linear-gradient(180deg, #ffdc86 0%, #ffb347 100%);
+padding-right:2px;
+}
+.image{
+    width: 568px;
+    height: 540px;
+    border-radius: 30px;
+}
+.info{
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+    border-radius: 30px;
+width: 720px;
+height: 530px;
+background: #f8f8f8;
+padding: 98px 64px;
+}
+.description{
+font-weight: 400;
+font-size: 16px;
+line-height: 138%;
+letter-spacing: -0.02em;
+color: #121417;
+}
+.button{
+    margin-top: 32px;
+    border-radius: 12px;
+width: 267px;
+height: 60px;
+color:#121417;
+background: #f4c550;
+font-weight: 700;
+font-size: 18px;
+line-height: 156%;
+color: #121417;
+}
+.button:hover{
+    background: #ffdc86;
+}
+.generalInfo{
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    border: 1.50px dashed #f4c550;
+border-radius: 30px;
+height: 116px;
+align-items: center;
+}
+.list{
+    display: flex;
+    flex-direction: row;
+    gap: 100px;
+    list-style: none;
+}
+.item{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap:16px;
+}
+.count{
+    font-family: var(--font-family);
+font-weight: 500;
+font-size: 28px;
+line-height: 114%;
+letter-spacing: -0.02em;
+color: #121417;
+}
+.option{
+    font-family: var(--font-family);
+font-weight: 400;
+font-size: 14px;
+line-height: 129%;
+letter-spacing: -0.02em;
+color: rgba(18, 20, 23, 0.7);
+width: 76px;
+}
