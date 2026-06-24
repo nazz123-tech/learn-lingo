@@ -28,9 +28,10 @@ export default function TeachersPageClient() {
 
   return (
     <main className={css.main}>
-      <FiltersBar filters={filters} onChange={handleFilterChange} />
+      
       
       <div className={css.container}>
+        <FiltersBar filters={filters} onChange={handleFilterChange} />
         <ul className={css.list}>
           {teachers.map((teacher, index) => (
             <AnimatedItem key={teacher.id} index={index}>

@@ -30,8 +30,6 @@ background: linear-gradient(180deg, #ffdc86 0%, #ffb347 100%);
 padding-right:2px;
 }
 .image{
-    width: 568px;
-    height: 540px;
     border-radius: 30px;
 }
 .info{

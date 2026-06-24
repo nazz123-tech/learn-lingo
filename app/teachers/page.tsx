@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import TeachersPageClient from './TeachersPapeClient';
+import TeachersPageClient from './TeachersPageClient';
 
 export const metadata: Metadata = {
   title: 'Find a Teacher',

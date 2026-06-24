@@ -7,6 +7,7 @@ import { QueryProvider } from "@/components/providers/QueryProvider";
 import { Slide, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
+
 const robotoSans = Roboto({
   variable: "--font-roboto-sans",
   subsets: ["latin"],
@@ -35,7 +36,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={`${robotoSans.variable}`}>
-      <body>
+      <body >
         <QueryProvider>
           <ToastContainer
               position="top-center"
@@ -52,7 +53,7 @@ export default function RootLayout({
             />
             <AuthProvider>
           <Header/>
-            {children}
+            {children}  
         </AuthProvider>
         </QueryProvider>
       </body>

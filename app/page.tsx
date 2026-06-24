@@ -2,6 +2,7 @@
 import css from "./page.module.css"
 import {useRouter} from "next/navigation"
 import { Metadata } from "next";
+import Image from "next/image";
 
 const metadata: Metadata = {
   title: 'Home',
@@ -10,7 +11,8 @@ const metadata: Metadata = {
 
 export default function Home() {
     const router=useRouter();
- return <main>
+ return (
+ <main>
     <div className={css.container}>
         <div className={css.content}>
             <div className={css.info}>
@@ -18,7 +20,7 @@ export default function Home() {
             <p className={css.description}>Embark on an Exciting Language Journey with Expert Language Tutors: Elevate your language proficiency to new heights by connecting with highly qualified and experienced tutors.</p>
             <button className={css.button} onClick={()=>router.push("/teachers")}>Get Started</button>
             </div>
-            <img className={css.image} src="/block.svg" alt="Language Learning"></img>
+            <Image  width={568} height={540} className={css.image} src="/block.svg" alt="Language Learning"></Image>
         </div>
         <div className={css.generalInfo}>
             <ul className={css.list}>
@@ -40,5 +42,5 @@ export default function Home() {
             </ul>
         </div>
     </div>
- </main>
+ </main>)
 }

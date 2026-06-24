@@ -48,14 +48,14 @@ export function FiltersBar({ filters, onChange }: FiltersBarProps) {
         onChange={(val) => onChange({ ...filters, language: val as string | null })}
       />
       <CustomSelect
-      wide={'198px'}
+      wide={'260px'}
         label="Level of knowledge"
         options={LEVELS}
         value={filters.level ?? null}
         onChange={(val) => onChange({ ...filters, level: val as string | null })}
       />
       <CustomSelect
-      wide={'124px'}
+      wide={'150px'}
         label="Price"
         options={PRICES}
         value={filters.price ?? null}
